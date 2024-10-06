@@ -6,7 +6,8 @@ npm install
 download expo go on your phone
 
 to run app:
-rightclick package.json -> click open in terminal
+right click package.json -> open in terminal
+do:
 ```
 npx expo start
 ```
