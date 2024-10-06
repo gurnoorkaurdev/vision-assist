@@ -17,3 +17,8 @@ npx expo start --tunnel
 ```
 use your phone to scan qr code that shows up in terminal
 
+if you run into: CommandError: ngrok tunnel took too long to connect.
+then do:
+```
+npx expo start --tunnel --reset-cache
+```
