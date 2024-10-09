@@ -1,13 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import HomeScreen from './HomeScreen'; // Adjust the path as needed
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function App() {
+const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <HomeScreen />
-      <StatusBar style="auto" />
     </SafeAreaView>
   );
-}
+};
+
+export default App;
