@@ -4,9 +4,8 @@ import TabNavigator from './TabNavigator'; // Adjust the path as needed
 
 const Home = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
       <TabNavigator />
-    </SafeAreaView>
+  
   );
 };
 
