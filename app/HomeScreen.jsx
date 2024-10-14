@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
@@ -9,30 +9,12 @@ const HomeScreen = () => {
       <View style={styles.header}>
         <Text style={styles.welcomeText}>Welcome to Vision Assist!</Text>
       </View>
-      
+
       {/* Main Features */}
       <View style={styles.mainContent}>
-        <TouchableOpacity style={styles.button} onPress={() => {/* Handle Voice Assistance */}}>
-          <Text style={styles.buttonText}>Voice Assistance</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => {/* Handle Object Recognition */}}>
-          <Text style={styles.buttonText}>Object Recognition</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => {/* Handle Read Text */}}>
-          <Text style={styles.buttonText}>Read Text</Text>
-        </TouchableOpacity>
-      </View>
-      
-      {/* Settings and Help */}
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={() => {/* Navigate to Settings */}}>
-          <Text style={styles.footerText}>Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {/* Navigate to Help */}}>
-          <Text style={styles.footerText}>Help</Text>
-        </TouchableOpacity>
+        <Text style={styles.descriptionText}>
+          Use the bottom tabs to navigate between Object Recognition, Scan Text, Change Language, and Settings.
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -56,28 +38,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
-  button: {
-    backgroundColor: '#2c3e50',
-    padding: 20,
-    borderRadius: 10,
-    margin: 10,
-    width: '80%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 20,
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingBottom: 30,
-  },
-  footerText: {
+  descriptionText: {
     fontSize: 18,
     color: '#2c3e50',
+    textAlign: 'center',
   },
 });
 
 export default HomeScreen;
+

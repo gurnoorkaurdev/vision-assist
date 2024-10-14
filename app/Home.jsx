@@ -1,8 +1,8 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TabNavigator from './TabNavigator'; // Correct path for TabNavigator
+import TabNavigator from './TabNavigator'; // Adjust path if needed
 
-const App = () => {
+const Home = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TabNavigator />
@@ -10,9 +10,4 @@ const App = () => {
   );
 };
 
-export default App;
-
-
-
-
-
+export default Home;
