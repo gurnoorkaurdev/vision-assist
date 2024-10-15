@@ -24,6 +24,7 @@ const TabNavigator = () => {
           backgroundColor: '#161622',
           height: 100,
           paddingTop: 10,
+          borderTopWidth: 0
         },
         tabBarActiveTintColor: '#E7F1A8',
         tabBarInactiveTintColor: '#FFFDF5',
