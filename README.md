@@ -27,5 +27,3 @@ then do:
 ```
 npx expo start --tunnel --reset-cache
 ```
-
-Check
