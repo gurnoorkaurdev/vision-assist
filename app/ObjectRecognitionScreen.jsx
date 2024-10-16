@@ -30,7 +30,7 @@ const ObjectRecognitionScreen = () => {
     camera = facing == 'front' ? 'back' : 'front'
     Speech.speak(`${camera} camera`)
   }
-
+  // Test comment
   return (
     <CameraView className="flex-1" facing={facing}>
       <View className="flex-row">
