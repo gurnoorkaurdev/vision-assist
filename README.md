@@ -27,3 +27,10 @@ then do:
 ```
 npx expo start --tunnel --reset-cache
 ```
+
+For text to speech dependency:
+
+```
+npm install react-native-camera react-native-tesseract-ocr react-native-tts
+
+```
