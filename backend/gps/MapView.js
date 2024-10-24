@@ -1,4 +1,3 @@
-// PlatformMap.js
 import { Platform } from 'react-native';
 import { MapComponent } from './AppleMapView';
 import { MapKitComponent } from './MapKitView';
