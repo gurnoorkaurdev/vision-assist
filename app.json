@@ -13,19 +13,46 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.visionassist.app",
+      "config": {
+        "usesNonExemptEncryption": false
     },
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "Vision Assist needs access to location to show your position on the map and provide navigation assistance.",
+      "NSLocationAlwaysUsageDescription": "Vision Assist needs access to location when in the background to continue providing navigation assistance.",
+      "NSLocationAlwaysAndWhenInUseUsageDescription": "Vision Assist needs access to location to provide navigation assistance both while using the app and in the background.",
+      "UIBackgroundModes": [
+        "location",
+        "fetch"
+      ]
+    }
+  },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.visionassist.app",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Vision Assist needs access to location to provide navigation assistance both while using the app and in the background.",
+          "locationAlwaysPermission": "Vision Assist needs access to location when in the background to continue providing navigation assistance.",
+          "locationWhenInUsePermission": "Vision Assist needs access to location to show your position on the map and provide navigation assistance."
+        }        
+      ]
     ]
   }
 }
