@@ -46,7 +46,7 @@ export const MapKitComponent = () => {
         <View style={styles.container}>
             <MapView
                 style={styles.map}
-                provider={PROVIDER_GOOGLE}
+                provider={null}
                 initialRegion={{
                     latitude: location.coords.latitude,
                     longitude: location.coords.longitude,
