@@ -1,8 +1,8 @@
 import { Platform } from 'react-native';
 import { MapComponent } from './AppleMapView';
-import { MapKitComponent } from './MapKitView';
+import { MapKitComponent } from './AndroidMapView';
 
 export const PlatformMap = Platform.select({
-    ios: MapComponent,
-    android: MapKitComponent,
+    ios: AppleMapComponent,
+    android: AndroidMapComponent,
 });

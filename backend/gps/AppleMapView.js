@@ -4,11 +4,12 @@ import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Menu as MenuIcon, Search as SearchIcon } from 'lucide-react-native';
 
-export const MapComponent = () => {
+export const AppleMapComponent = () => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const mapRef = useRef(null);
 
     useEffect(() => {
@@ -19,39 +20,72 @@ export const MapComponent = () => {
                     setErrorMsg('Permission to access location was denied');
                     return;
                 }
-
+        
                 let currentLocation = await Location.getCurrentPositionAsync({});
+                if (!currentLocation) {
+                    setErrorMsg('Unable to get current location');
+                    return;
+                }
                 setLocation(currentLocation);
             } catch (error) {
-                setErrorMsg('Error getting location: ' + error.message);
+                const errorMessage = error?.message || 'An unknown error occurred';
+                setErrorMsg('Error getting location: ' + errorMessage);
             }
         };
 
         getLocation();
     }, []);
 
+    if (isLoading && !location) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>Map Loading...</Text>
+            </View>
+        );
+    }
+
+    if (errorMsg) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>{errorMsg}</Text>
+            </View>
+        );
+    }
+
     const handleSearch = async () => {
         try {
-            if (!searchQuery.trim()) return;
-
+            if (!searchQuery.trim()) {
+                setErrorMsg('Please enter a search query');
+                return;
+            }
+    
             const results = await Location.geocodeAsync(searchQuery);
             
-            if (results.length > 0) {
-                setSearchResults(results);
-                mapRef.current?.animateToRegion({
+            if (!results || results.length === 0) {
+                setErrorMsg('No results found');
+                return;
+            }
+    
+            setSearchResults(results);
+            
+            // Check if mapRef.current exists before calling animateToRegion
+            if (mapRef.current) {
+                mapRef.current.animateToRegion({
                     latitude: results[0].latitude,
                     longitude: results[0].longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }, 1000);
-            } else {
-                setErrorMsg('No results found');
             }
         } catch (error) {
-            setErrorMsg('Error searching location: ' + error.message);
+            const errorMessage = error?.message || 'An unknown error occurred';
+            setErrorMsg('Error searching location: ' + errorMessage);
+        } finally {
+            Keyboard.dismiss();
         }
-        Keyboard.dismiss();
     };
+    
+    
 
     if (errorMsg) {
         return (
@@ -97,8 +131,8 @@ export const MapComponent = () => {
                 userInterfaceStyle="dark"
                 provider={null}
                 initialRegion={{
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
+                    latitude: location?.coords?.latitude || 0,
+                    longitude: location?.coords?.longitude || 0,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
