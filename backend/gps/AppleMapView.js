@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Keyboard, Platform} from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Keyboard, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Menu as MenuIcon, Search as SearchIcon } from 'lucide-react-native';
+import { searchLocation, fetchGoogleMapsGeocode } from './mapApi.ios';
 
 export const AppleMapComponent = () => {
     const [location, setLocation] = useState(null);
@@ -28,14 +29,13 @@ export const AppleMapComponent = () => {
                 }
                 setLocation(currentLocation);
             } catch (error) {
-                const errorMessage = error?.message || 'An unknown error occurred';
-                setErrorMsg('Error getting location: ' + errorMessage);
+                setErrorMsg('Error getting location: ' + (error?.message || 'An unknown error occurred'));
             }
         };
 
         getLocation();
     }, []);
-
+    
     if (isLoading && !location) {
         return (
             <View style={styles.container}>
@@ -43,32 +43,22 @@ export const AppleMapComponent = () => {
             </View>
         );
     }
-
-    if (errorMsg) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{errorMsg}</Text>
-            </View>
-        );
-    }
-
-    const handleSearch = async () => {
+    const handleSearch = async () => {  
         try {
             if (!searchQuery.trim()) {
                 setErrorMsg('Please enter a search query');
                 return;
             }
     
-            const results = await Location.geocodeAsync(searchQuery);
-            
+            const results = await fetchGoogleMapsGeocode(searchQuery);  // Call the Google Maps geocode function
+    
             if (!results || results.length === 0) {
                 setErrorMsg('No results found');
                 return;
             }
     
             setSearchResults(results);
-            
-            // Check if mapRef.current exists before calling animateToRegion
+
             if (mapRef.current) {
                 mapRef.current.animateToRegion({
                     latitude: results[0].latitude,
@@ -78,27 +68,16 @@ export const AppleMapComponent = () => {
                 }, 1000);
             }
         } catch (error) {
-            const errorMessage = error?.message || 'An unknown error occurred';
-            setErrorMsg('Error searching location: ' + errorMessage);
+            setErrorMsg('Error searching location: ' + (error?.message || 'An unknown error occurred'));
         } finally {
             Keyboard.dismiss();
         }
     };
-    
-    
 
     if (errorMsg) {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>{errorMsg}</Text>
-            </View>
-        );
-    }
-
-    if (!location) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Map Loading...</Text>
             </View>
         );
     }
@@ -129,7 +108,6 @@ export const AppleMapComponent = () => {
                 ref={mapRef}
                 style={styles.map}
                 userInterfaceStyle="dark"
-                provider={null}
                 initialRegion={{
                     latitude: location?.coords?.latitude || 0,
                     longitude: location?.coords?.longitude || 0,
@@ -141,14 +119,16 @@ export const AppleMapComponent = () => {
                 showsScale={true}
                 mapType="mutedStandard"
             >
-                {searchResults.map((result, index) => (
-                    <Marker
-                        key={index}
-                        coordinate={{
-                            latitude: result.latitude,
-                            longitude: result.longitude
-                        }}
-                    />
+                {searchResults
+                    .filter(result => result.latitude && result.longitude)  // Filter for valid coordinates
+                    .map((result, index) => (
+                        <Marker
+                            key={index}
+                            coordinate={{
+                                latitude: result.latitude,
+                                longitude: result.longitude
+                            }}
+                        />
                 ))}
             </MapView>
         </View>
