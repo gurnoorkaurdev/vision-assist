@@ -16,8 +16,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.visionassist.app",
       "config": {
-        "usesNonExemptEncryption": false,
-        "googleMapsApiKey": "AIzaSyBn3tNlI7_4o5kQfZ6bBFkZQCdtvOUU-sU"
+        "usesNonExemptEncryption": false
     },
     "infoPlist": {
       "NSLocationWhenInUseUsageDescription": "Vision Assist needs access to location to show your position on the map and provide navigation assistance.",
@@ -33,11 +32,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "config":{
-        "googleMaps": {
-          "apiKey": "AIzaSyBn3tNlI7_4o5kQfZ6bBFkZQCdtvOUU-sU"
-        }
       },
       "package": "com.visionassist.app",
       "permissions": [
