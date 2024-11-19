@@ -32,5 +32,11 @@ For text to speech dependency:
 
 ```
 npm install react-native-camera react-native-tesseract-ocr react-native-tts
-
 ```
+
+## Environment Setup
+1. Create a new `.env` file in the root directory
+2. Copy the contents of `.env.example` into your new `.env` file
+3. Replace the placeholder values with your actual API keys
+4. Run `npm install`
+5. Start the app with `npm start`
