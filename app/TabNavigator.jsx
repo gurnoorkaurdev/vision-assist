@@ -34,7 +34,7 @@ const TabNavigator = () => {
           headerShown: false,
           tabBarLabel: "Object Recognition",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="scan1" size="32px" color={color} />
+            <AntDesign name="scan1" size={32} color={color} />
           ),
         }}
         component={ObjectRecognitionScreen}
@@ -50,7 +50,7 @@ const TabNavigator = () => {
           headerShown: false,
           tabBarLabel: "Scan Text",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="text-fields" size="32px" color={color} />
+            <MaterialIcons name="text-fields" size={32} color={color} />
           ),
         }}
         component={ScanTextScreen}
@@ -68,7 +68,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color }) => (
             <MaterialIcons
               name="assistant-navigation"
-              size="32px"
+              size={32}
               color={color}
             />
           ),
@@ -87,7 +87,7 @@ const TabNavigator = () => {
           headerShown: false,
           tabBarLabel: "Emergency Alarm",
           tabBarIcon: ({ color }) => (
-            <Feather name="bell" size="32px" color={color} />
+            <Feather name="bell" size={32} color={color} />
           ),
         }}
         component={EmergencyAlarmScreen}
